@@ -9,9 +9,24 @@
     date: 19.07.2025
 ]]
 
-if Library then
-    Library:Unload()
+-- ========================================
+-- FIX: Proper cleanup of existing UI
+-- ========================================
+if getgenv().Library then
+    pcall(function()
+        getgenv().Library:Unload()
+    end)
+    task.wait(0.2) -- Wait for cleanup to complete
 end
+
+-- Clean any orphaned ScreenGuis
+local parent = (gethui and gethui()) or game:GetService("CoreGui")
+for _, gui in pairs(parent:GetChildren()) do
+    if gui:IsA("ScreenGui") and gui.Name == "\0" then
+        pcall(function() gui:Destroy() end)
+    end
+end
+task.wait(0.1)
 
 local LoadTick = os.clock()
 
