@@ -294,8 +294,8 @@ do
 
             local NewTween = Tween:Create(Item,
                 TweenInfo.new(Speed or Library.Tween.Time, Library.Tween.Style, Library.Tween.Direction), {
-                [Property] = Visibility and OldTransparency or 1
-            }, true)
+                    [Property] = Visibility and OldTransparency or 1
+                }, true)
 
             Library:Connect(NewTween.Tween.Completed, function()
                 if not Visibility then
@@ -466,8 +466,10 @@ do
             local Set = function(Input)
                 local DragDelta = Input.Position - DragStart
                 self:Tween(TweenInfo.new(0.16, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
-                    { Position = UDim2New(StartPosition.X.Scale, StartPosition.X.Offset + DragDelta.X,
-                        StartPosition.Y.Scale, StartPosition.Y.Offset + DragDelta.Y) })
+                    {
+                        Position = UDim2New(StartPosition.X.Scale, StartPosition.X.Offset + DragDelta.X,
+                            StartPosition.Y.Scale, StartPosition.Y.Offset + DragDelta.Y)
+                    })
             end
 
             local InputChanged
@@ -1447,7 +1449,7 @@ do
                 Debounce = true
                 Items["Page"].Instance.Visible = Bool
                 Items["Page"].Instance.Parent = Bool and Data.Page.Items["Columns"].Instance or
-                Library.UnusedHolder.Instance
+                    Library.UnusedHolder.Instance
 
                 if SubPage.Active then
                     Items["Inactive"]:Tween(nil, { BackgroundTransparency = 0 })
@@ -1640,14 +1642,14 @@ do
                     Items["Indicator"]:Tween(nil, { BackgroundColor3 = Library.Theme.Accent })
                     task.wait(0.05)
                     Items["Check"]:Tween(
-                    TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+                        TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
                         { ImageTransparency = 0, Size = UDim2New(1, 2, 1, 2) })
                 else
                     Items["Indicator"]:ChangeItemTheme({ BackgroundColor3 = "Element", BorderColor3 = "Border" })
                     Items["Indicator"]:Tween(nil, { BackgroundColor3 = Library.Theme.Element })
                     task.wait(0.05)
                     Items["Check"]:Tween(
-                    TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
+                        TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Back, Enum.EasingDirection.Out),
                         { ImageTransparency = 1, Size = UDim2New(0, 0, 0, 0) })
                 end
 
@@ -1981,7 +1983,7 @@ do
                 Library.Flags[Slider.Flag] = Slider.Value
 
                 Items["Accent"]:Tween(
-                TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+                    TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
                     { Size = UDim2New((Slider.Value - Data.Min) / (Data.Max - Data.Min), 0, 1, 0) })
                 Items["Value"].Instance.Text = StringFormat("%s%s", tostring(Slider.Value), Data.Suffix)
 
@@ -2010,7 +2012,7 @@ do
                     Slider.Sliding = true
 
                     local SizeX = (Mouse.X - Items["RealSlider"].Instance.AbsolutePosition.X) /
-                    Items["RealSlider"].Instance.AbsoluteSize.X
+                        Items["RealSlider"].Instance.AbsoluteSize.X
                     local Value = ((Data.Max - Data.Min) * SizeX) + Data.Min
 
                     Slider:Set(Value)
@@ -2034,7 +2036,7 @@ do
                 if Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch then
                     if Slider.Sliding then
                         local SizeX = (Mouse.X - Items["RealSlider"].Instance.AbsolutePosition.X) /
-                        Items["RealSlider"].Instance.AbsoluteSize.X
+                            Items["RealSlider"].Instance.AbsoluteSize.X
                         local Value = ((Data.Max - Data.Min) * SizeX) + Data.Min
 
                         Slider:Set(Value)
@@ -2360,7 +2362,7 @@ do
                     Items["OptionHolder"].Instance.Visible = Dropdown.IsOpen
                     task.wait(0.2)
                     Items["OptionHolder"].Instance.Parent = not Dropdown.IsOpen and Library.UnusedHolder.Instance or
-                    Library.Holder.Instance
+                        Library.Holder.Instance
                 end)
             end
 
@@ -3277,7 +3279,7 @@ do
                                     while task.wait() do
                                         local Speed = MathAbs(MathSin(tick() * (AnimationSpeedSlider.Value / 25)))
                                         Colorpicker:Set(
-                                        KeyframeOneColorpicker.Color:Lerp(KeyframeTwoColorpicker.Color, Speed),
+                                            KeyframeOneColorpicker.Color:Lerp(KeyframeTwoColorpicker.Color, Speed),
                                             Colorpicker.Alpha)
                                         UpdateSync(true)
 
@@ -3542,7 +3544,7 @@ do
                     Items["ColorpickerWindow"].Instance.Visible = Colorpicker.IsOpen
                     task.wait(0.2)
                     Items["ColorpickerWindow"].Instance.Parent = not Colorpicker.IsOpen and Library.UnusedHolder
-                    .Instance or Library.Holder.Instance
+                        .Instance or Library.Holder.Instance
                 end)
             end
 
@@ -3616,13 +3618,13 @@ do
                 local HuePositionY = MathClamp(Colorpicker.Hue, 0, 0.995)
 
                 Items["PaletteDragger"]:Tween(
-                TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+                    TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
                     { Position = UDim2New(PaletteValueX, 0, PaletteValueY, 0) })
                 Items["HueDragger"]:Tween(
-                TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+                    TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
                     { Position = UDim2New(0, 0, HuePositionY, 0) })
                 Items["AlphaDragger"]:Tween(
-                TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+                    TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
                     { Position = UDim2New(AlphaPositionX, 0, 0, 0) })
                 Colorpicker:Update(true, true)
             end
@@ -3640,26 +3642,26 @@ do
                 end
 
                 local ValueX = MathClamp(
-                1 -
-                (Input.Position.X - Items["Palette"].Instance.AbsolutePosition.X) /
-                Items["Palette"].Instance.AbsoluteSize.X, 0, 1)
+                    1 -
+                    (Input.Position.X - Items["Palette"].Instance.AbsolutePosition.X) /
+                    Items["Palette"].Instance.AbsoluteSize.X, 0, 1)
                 local ValueY = MathClamp(
-                1 -
-                (Input.Position.Y - Items["Palette"].Instance.AbsolutePosition.Y) /
-                Items["Palette"].Instance.AbsoluteSize.Y, 0, 1)
+                    1 -
+                    (Input.Position.Y - Items["Palette"].Instance.AbsolutePosition.Y) /
+                    Items["Palette"].Instance.AbsoluteSize.Y, 0, 1)
 
                 Colorpicker.Saturation = ValueX
                 Colorpicker.Value = ValueY
 
                 local SlideX = MathClamp(
-                (Input.Position.X - Items["Palette"].Instance.AbsolutePosition.X) /
-                Items["Palette"].Instance.AbsoluteSize.X, 0, 0.99)
+                    (Input.Position.X - Items["Palette"].Instance.AbsolutePosition.X) /
+                    Items["Palette"].Instance.AbsoluteSize.X, 0, 0.99)
                 local SlideY = MathClamp(
-                (Input.Position.Y - Items["Palette"].Instance.AbsolutePosition.Y) /
-                Items["Palette"].Instance.AbsoluteSize.Y, 0, 0.99)
+                    (Input.Position.Y - Items["Palette"].Instance.AbsolutePosition.Y) /
+                    Items["Palette"].Instance.AbsoluteSize.Y, 0, 0.99)
 
                 Items["PaletteDragger"]:Tween(
-                TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+                    TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
                     { Position = UDim2New(SlideX, 0, SlideY, 0) })
                 Colorpicker:Update(false, true)
             end
@@ -3673,17 +3675,19 @@ do
                 end
 
                 local ValueY = MathClamp(
-                (Input.Position.Y - Items["Hue"].Instance.AbsolutePosition.Y) / Items["Hue"].Instance.AbsoluteSize.Y, 0,
+                    (Input.Position.Y - Items["Hue"].Instance.AbsolutePosition.Y) / Items["Hue"].Instance.AbsoluteSize.Y,
+                    0,
                     1)
 
                 Colorpicker.Hue = ValueY
 
                 local SlideY = MathClamp(
-                (Input.Position.Y - Items["Hue"].Instance.AbsolutePosition.Y) / Items["Hue"].Instance.AbsoluteSize.Y, 0,
+                    (Input.Position.Y - Items["Hue"].Instance.AbsolutePosition.Y) / Items["Hue"].Instance.AbsoluteSize.Y,
+                    0,
                     0.995)
 
                 Items["HueDragger"]:Tween(
-                TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+                    TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
                     { Position = UDim2New(0, 0, SlideY, 0) })
                 Colorpicker:Update(false, true)
             end
@@ -3697,17 +3701,19 @@ do
                 end
 
                 local ValueX = MathClamp(
-                (Input.Position.X - Items["Alpha"].Instance.AbsolutePosition.X) / Items["Alpha"].Instance.AbsoluteSize.X,
+                    (Input.Position.X - Items["Alpha"].Instance.AbsolutePosition.X) /
+                    Items["Alpha"].Instance.AbsoluteSize.X,
                     0, 1)
 
                 Colorpicker.Alpha = ValueX
 
                 local SlideX = MathClamp(
-                (Input.Position.X - Items["Alpha"].Instance.AbsolutePosition.X) / Items["Alpha"].Instance.AbsoluteSize.X,
+                    (Input.Position.X - Items["Alpha"].Instance.AbsolutePosition.X) /
+                    Items["Alpha"].Instance.AbsoluteSize.X,
                     0, 0.995)
 
                 Items["AlphaDragger"]:Tween(
-                TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
+                    TweenInfo.new(Library.Tween.Time, Enum.EasingStyle.Quart, Enum.EasingDirection.Out),
                     { Position = UDim2New(SlideX, 0, 0, 0) })
                 Colorpicker:Update(true, true)
             end
@@ -3974,7 +3980,7 @@ do
 
                     local KeyString = Keys[Keybind.Key] or StringGSub(Key, "Enum.", "") or "None"
                     local TextToDisplay = StringGSub(StringGSub(KeyString, "KeyCode.", ""), "UserInputType.", "") or
-                    "None"
+                        "None"
 
                     Keybind.Value = TextToDisplay
                     Items["KeyButton"].Instance.Text = TextToDisplay
@@ -4004,7 +4010,7 @@ do
 
                     local KeyString = Keys[Keybind.Key] or StringGSub(tostring(RealKey), "Enum.", "") or RealKey
                     local TextToDisplay = KeyString and
-                    StringGSub(StringGSub(KeyString, "KeyCode.", ""), "UserInputType.", "") or "None"
+                        StringGSub(StringGSub(KeyString, "KeyCode.", ""), "UserInputType.", "") or "None"
 
                     TextToDisplay = StringGSub(StringGSub(KeyString, "KeyCode.", ""), "UserInputType.", "")
 
@@ -4101,7 +4107,7 @@ do
                     Items["KeybindWindow"].Instance.Visible = Keybind.IsOpen
                     task.wait(0.2)
                     Items["KeybindWindow"].Instance.Parent = not Keybind.IsOpen and Library.UnusedHolder.Instance or
-                    Library.Holder.Instance
+                        Library.Holder.Instance
                 end)
             end
 
@@ -4166,7 +4172,7 @@ do
                         end
 
                         Items["KeyButton"].Instance.Text = Count == 1 and "." or Count == 2 and ".." or
-                        Count == 3 and "..."
+                            Count == 3 and "..."
                         Count += 1
                         task.wait(0.5)
                     end
@@ -5549,52 +5555,49 @@ do
                 Color = RGBSequence { RGBSequenceKeypoint(0, FromRGB(255, 255, 255)), RGBSequenceKeypoint(1, FromRGB(99, 108, 117)) }
             })
 
-            -- Minimize and Close Buttons
-            Items["UtilButtons"] = Instances:Create("Frame", {
-                Parent = Items["Side"].Instance,
+            -- Floating Toggle Button
+            Items["FloatingToggle"] = Instances:Create("TextButton", {
+                Parent = Library.Holder.Instance,
                 Name = "\0",
-                BackgroundTransparency = 1,
-                AnchorPoint = Vector2New(1, 0),
-                Position = UDim2New(1, -6, 0, 12),
-                Size = UDim2New(0, 40, 0, 16),
-                BorderSizePixel = 0,
-                BackgroundColor3 = FromRGB(255, 255, 255)
-            })
-
-            Instances:Create("UIListLayout", {
-                Parent = Items["UtilButtons"].Instance,
-                Name = "\0",
-                FillDirection = Enum.FillDirection.Horizontal,
-                HorizontalAlignment = Enum.HorizontalAlignment.Right,
-                Padding = UDimNew(0, 6),
-                SortOrder = Enum.SortOrder.LayoutOrder
-            })
-
-            Items["MinimizeButton"] = Instances:Create("ImageButton", {
-                Parent = Items["UtilButtons"].Instance,
-                Name = "\0",
-                Image = "rbxassetid://71197946135150",
-                ImageColor3 = FromRGB(235, 235, 235),
-                BackgroundTransparency = 1,
-                Size = UDim2New(0, 16, 0, 16),
-                BorderSizePixel = 0,
+                Text = "",
                 AutoButtonColor = false,
-                BackgroundColor3 = FromRGB(255, 255, 255)
+                AnchorPoint = Vector2New(0, 1),
+                Position = UDim2New(0, 20, 1, -20),
+                Size = UDim2New(0, 60, 0, 25),
+                BorderSizePixel = 2,
+                BackgroundColor3 = FromRGB(14, 17, 15),
+                ZIndex = 10000
             })
-            Items["MinimizeButton"]:AddToTheme({ ImageColor3 = "Text" })
+            Items["FloatingToggle"]:AddToTheme({ BackgroundColor3 = "Background", BorderColor3 = "Border" })
 
-            Items["CloseButton"] = Instances:Create("ImageButton", {
-                Parent = Items["UtilButtons"].Instance,
+            Instances:Create("UIStroke", {
+                Parent = Items["FloatingToggle"].Instance,
                 Name = "\0",
-                Image = "rbxassetid://71197946135150",
-                ImageColor3 = FromRGB(235, 235, 235),
+                Color = FromRGB(42, 49, 45),
+                LineJoinMode = Enum.LineJoinMode.Miter,
+                ApplyStrokeMode = Enum.ApplyStrokeMode.Border
+            }):AddToTheme({ Color = "Outline" })
+
+            Items["FloatingText"] = Instances:Create("TextLabel", {
+                Parent = Items["FloatingToggle"].Instance,
+                Name = "\0",
+                FontFace = Library.Font,
+                TextColor3 = FromRGB(235, 235, 235),
+                BorderColor3 = FromRGB(0, 0, 0),
+                Text = "Keybinds",
+                AnchorPoint = Vector2New(0.5, 0.5),
                 BackgroundTransparency = 1,
-                Size = UDim2New(0, 16, 0, 16),
+                Position = UDim2New(0.5, 0, 0.5, 0),
+                Size = UDim2New(1, -8, 1, 0),
                 BorderSizePixel = 0,
-                AutoButtonColor = false,
+                TextSize = 9,
                 BackgroundColor3 = FromRGB(255, 255, 255)
             })
-            Items["CloseButton"]:AddToTheme({ ImageColor3 = "Text" })
+            Items["FloatingText"]:AddToTheme({ TextColor3 = "Text" })
+
+            Items["FloatingText"]:TextBorder()
+
+            Items["FloatingToggle"]:MakeDraggable()
 
             UserInputService.MouseIconEnabled = false
 
@@ -5603,30 +5606,19 @@ do
 
         local Debounce = false
 
-        -- Minimize Button Logic
-        Items["MinimizeButton"]:Connect("MouseButton1Click", function()
-            Window:SetOpen(false)
+        -- Floating Toggle Button Logic
+        Items["FloatingToggle"]:Connect("MouseButton1Click", function()
+            Window:SetOpen(not Window.IsOpen)
         end)
 
-        Items["MinimizeButton"]:OnHover(function()
-            Items["MinimizeButton"]:Tween(nil, { ImageColor3 = Library.Theme.Accent })
+        Items["FloatingToggle"]:OnHover(function()
+            Items["FloatingToggle"]:ChangeItemTheme({ BackgroundColor3 = "Hovered Element", BorderColor3 = "Border" })
+            Items["FloatingToggle"]:Tween(nil, { BackgroundColor3 = Library.Theme["Hovered Element"] })
         end)
 
-        Items["MinimizeButton"]:OnHoverLeave(function()
-            Items["MinimizeButton"]:Tween(nil, { ImageColor3 = Library.Theme.Text })
-        end)
-
-        -- Close Button Logic
-        Items["CloseButton"]:Connect("MouseButton1Click", function()
-            Library:Destroy()
-        end)
-
-        Items["CloseButton"]:OnHover(function()
-            Items["CloseButton"]:Tween(nil, { ImageColor3 = FromRGB(255, 80, 80) })
-        end)
-
-        Items["CloseButton"]:OnHoverLeave(function()
-            Items["CloseButton"]:Tween(nil, { ImageColor3 = Library.Theme.Text })
+        Items["FloatingToggle"]:OnHoverLeave(function()
+            Items["FloatingToggle"]:ChangeItemTheme({ BackgroundColor3 = "Background", BorderColor3 = "Border" })
+            Items["FloatingToggle"]:Tween(nil, { BackgroundColor3 = Library.Theme.Background })
         end)
 
         Items["Input"]:Connect("Focused", function()
@@ -5748,8 +5740,11 @@ do
                     else
                         Window:AddToOldSizes(Element, Element.Instance.Size)
                         Element:Tween(TweenInfo.new(0.08, Enum.EasingStyle.Quad, Enum.EasingDirection.Out),
-                            { Size = UDim2New(Window:GetOldSize(Element).X.Scale, Window:GetOldSize(Element).X.Offset, 0,
-                                0) })
+                            {
+                                Size = UDim2New(Window:GetOldSize(Element).X.Scale, Window:GetOldSize(Element).X.Offset,
+                                    0,
+                                    0)
+                            })
                         task.wait(0.1)
                         Element.Instance.Visible = false
                     end
@@ -6390,7 +6385,7 @@ do
                     LoadAndSaveButton:Add("Load", function()
                         if ConfigSelected then
                             local Success, Result = Library:LoadConfig(readfile(Library.Folders.Configs ..
-                            "/" .. ConfigSelected))
+                                "/" .. ConfigSelected))
 
                             if Success then
                                 Library:Notification("Success", "Loaded config " .. ConfigSelected .. " succesfully", 5)
@@ -6520,9 +6515,9 @@ do
         local WeaponSubPage = CombatPage:SubPage({ Name = "Weapon", Columns = 2 })
         local AimbotSubPage = CombatPage:SubPage({ Name = "Aimbot", Columns = 2 })
 
-        do                                                                                            -- Weapon subpage
+        do     -- Weapon subpage
             local RangedWeaponSection = WeaponSubPage:Section({ Name = "Ranged Weapons", Side = 1 })
-            do                                                                                        -- Ranged weapon section
+            do -- Ranged weapon section
                 RangedWeaponSection:Toggle({
                     Name = "Enabled",
                     Flag = "RangedWeaponEnabled",
@@ -6622,9 +6617,9 @@ do
             end
         end
 
-        do                                                                                     -- Aimbot subpage
+        do     -- Aimbot subpage
             local SilentAimSection = AimbotSubPage:Section({ Name = "Silent Aim", Side = 1 })
-            do                                                                                 -- Silent aim section
+            do -- Silent aim section
                 SilentAimSection:Toggle({
                     Name = "Enabled",
                     Flag = "SilentAimEnabled",
@@ -6778,7 +6773,7 @@ do
             end
 
             local AimbotSection = AimbotSubPage:Section({ Name = "Camera", Side = 2 })
-            do                                                                          -- Aimbot section
+            do -- Aimbot section
                 AimbotSection:Toggle({
                     Name = "Enabled",
                     Flag = "AimbotEnabled",
