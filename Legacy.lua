@@ -4974,7 +4974,7 @@ do
                 FontFace = Library.Font,
                 TextColor3 = FromRGB(235, 235, 235),
                 BorderColor3 = FromRGB(0, 0, 0),
-                Text = "" .. Key .. " - " .. Name .. " (" .. Mode .. ")",
+                Text = "P" .. Key .. " - " .. Name .. " (" .. Mode .. ")",
                 BackgroundTransparency = 1,
                 Size = UDim2New(0, 0, 0, 15),
                 BorderSizePixel = 0,
