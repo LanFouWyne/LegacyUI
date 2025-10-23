@@ -4862,21 +4862,25 @@ do
         return Watermark
     end
 
-    Library.KeybindList = function(self)
+    Library.KeybindList = function(self, Window)
         local KeybindList = {}
         Library.KeyList = KeybindList
+        KeybindList.Window = Window
 
         local Items = {}
         do
-            Items["KeybindList"] = Instances:Create("Frame", {
+            Items["KeybindList"] = Instances:Create("TextButton", {
                 Parent = Library.Holder.Instance,
                 Name = "\0",
-                AnchorPoint = Vector2New(0, 0.5),
-                Position = UDim2New(0, 12, 0.5, 55),
+                Text = "",
+                AutoButtonColor = false,
+                AnchorPoint = Vector2New(0, 1),
+                Position = UDim2New(0, 12, 1, -12),
                 BorderColor3 = FromRGB(12, 12, 12),
                 Size = UDim2New(0, 116, 0, 32),
                 BorderSizePixel = 2,
-                BackgroundColor3 = FromRGB(14, 17, 15)
+                BackgroundColor3 = FromRGB(14, 17, 15),
+                ZIndex = 10000
             })
             Items["KeybindList"]:AddToTheme({ BackgroundColor3 = "Background", BorderColor3 = "Border" })
 
@@ -4989,6 +4993,27 @@ do
 
         function KeybindList:SetVisibility(Bool)
             Items["KeybindList"].Instance.Visible = Bool
+        end
+
+        -- Add toggle functionality to KeybindList
+        function KeybindList:SetToggle(Window)
+            KeybindList.Window = Window
+
+            Items["KeybindList"]:Connect("MouseButton1Click", function()
+                if KeybindList.Window then
+                    KeybindList.Window:SetOpen(not KeybindList.Window.IsOpen)
+                end
+            end)
+
+            Items["KeybindList"]:OnHover(function()
+                Items["KeybindList"]:ChangeItemTheme({ BackgroundColor3 = "Hovered Element", BorderColor3 = "Border" })
+                Items["KeybindList"]:Tween(nil, { BackgroundColor3 = Library.Theme["Hovered Element"] })
+            end)
+
+            Items["KeybindList"]:OnHoverLeave(function()
+                Items["KeybindList"]:ChangeItemTheme({ BackgroundColor3 = "Background", BorderColor3 = "Border" })
+                Items["KeybindList"]:Tween(nil, { BackgroundColor3 = Library.Theme.Background })
+            end)
         end
 
         return KeybindList
@@ -5555,71 +5580,12 @@ do
                 Color = RGBSequence { RGBSequenceKeypoint(0, FromRGB(255, 255, 255)), RGBSequenceKeypoint(1, FromRGB(99, 108, 117)) }
             })
 
-            -- Floating Toggle Button
-            Items["FloatingToggle"] = Instances:Create("TextButton", {
-                Parent = Library.Holder.Instance,
-                Name = "\0",
-                Text = "",
-                AutoButtonColor = false,
-                AnchorPoint = Vector2New(0, 1),
-                Position = UDim2New(0, 20, 1, -20),
-                Size = UDim2New(0, 60, 0, 25),
-                BorderSizePixel = 2,
-                BackgroundColor3 = FromRGB(14, 17, 15),
-                ZIndex = 10000
-            })
-            Items["FloatingToggle"]:AddToTheme({ BackgroundColor3 = "Background", BorderColor3 = "Border" })
-
-            Instances:Create("UIStroke", {
-                Parent = Items["FloatingToggle"].Instance,
-                Name = "\0",
-                Color = FromRGB(42, 49, 45),
-                LineJoinMode = Enum.LineJoinMode.Miter,
-                ApplyStrokeMode = Enum.ApplyStrokeMode.Border
-            }):AddToTheme({ Color = "Outline" })
-
-            Items["FloatingText"] = Instances:Create("TextLabel", {
-                Parent = Items["FloatingToggle"].Instance,
-                Name = "\0",
-                FontFace = Library.Font,
-                TextColor3 = FromRGB(235, 235, 235),
-                BorderColor3 = FromRGB(0, 0, 0),
-                Text = "Keybinds",
-                AnchorPoint = Vector2New(0.5, 0.5),
-                BackgroundTransparency = 1,
-                Position = UDim2New(0.5, 0, 0.5, 0),
-                Size = UDim2New(1, -8, 1, 0),
-                BorderSizePixel = 0,
-                TextSize = 9,
-                BackgroundColor3 = FromRGB(255, 255, 255)
-            })
-            Items["FloatingText"]:AddToTheme({ TextColor3 = "Text" })
-
-            Items["FloatingText"]:TextBorder()
-
-            Items["FloatingToggle"]:MakeDraggable()
-
             UserInputService.MouseIconEnabled = false
 
             Window.Items = Items
         end
 
         local Debounce = false
-
-        -- Floating Toggle Button Logic
-        Items["FloatingToggle"]:Connect("MouseButton1Click", function()
-            Window:SetOpen(not Window.IsOpen)
-        end)
-
-        Items["FloatingToggle"]:OnHover(function()
-            Items["FloatingToggle"]:ChangeItemTheme({ BackgroundColor3 = "Hovered Element", BorderColor3 = "Border" })
-            Items["FloatingToggle"]:Tween(nil, { BackgroundColor3 = Library.Theme["Hovered Element"] })
-        end)
-
-        Items["FloatingToggle"]:OnHoverLeave(function()
-            Items["FloatingToggle"]:ChangeItemTheme({ BackgroundColor3 = "Background", BorderColor3 = "Border" })
-            Items["FloatingToggle"]:Tween(nil, { BackgroundColor3 = Library.Theme.Background })
-        end)
 
         Items["Input"]:Connect("Focused", function()
             Items["Search"]:Tween(nil, { BackgroundTransparency = 0 })
@@ -5758,6 +5724,11 @@ do
                 SearchStepped = nil
             end
         end)
+
+        -- Set Window reference to KeybindList if it exists
+        if Library.KeyList then
+            Library.KeyList:SetToggle(Window)
+        end
 
         Window:SetOpen(true)
         return setmetatable(Window, self)
@@ -6496,13 +6467,13 @@ do
     end
 end
 
+local Watermark = Library:Watermark("This is a watermark")
+local KeybindList = Library:KeybindList()
+
 local Window = Library:Window({
     Logo = "77218680285262",
     FadeTime = 0.3,
 })
-
-local Watermark = Library:Watermark("This is a watermark")
-local KeybindList = Library:KeybindList()
 
 do
     local CombatPage = Window:Page({ Name = "Combat", SubPages = true })
