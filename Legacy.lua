@@ -3897,10 +3897,14 @@ do
                 Items["KeybindWindow"] = Instances:Create("Frame", {
                     Parent = Library.UnusedHolder.Instance,
                     Name = "\0",
+                    FontFace = Library.Font,
+                    TextColor3 = FromRGB(235, 235, 235),
                     Position = UDim2New(0.007692307699471712, 0, 0.35323384404182434, 0),
                     BorderColor3 = FromRGB(12, 12, 12),
+                    Text = "Toggle",
                     Size = UDim2New(0, 70, 0, 90),
                     BorderSizePixel = 2,
+                    TextSize = 9,
                     BackgroundColor3 = FromRGB(14, 17, 15)
                 })
                 Items["KeybindWindow"]:AddToTheme({ BackgroundColor3 = "Background", BorderColor3 = "Border" })
