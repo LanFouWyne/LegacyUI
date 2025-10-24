@@ -4887,7 +4887,8 @@ do
             Items["KeybindList"] = Instances:Create("TextButton", {
                 Parent = Library.Holder.Instance,
                 Name = "\0",
-                Text = "HellNah",
+                TextColor3 = FromRGB(235, 235, 235),
+                Text = "Legacy",
                 AutoButtonColor = false,
                 AnchorPoint = Vector2New(0, 1),
                 Position = UDim2New(0, 12, 1, -12),
