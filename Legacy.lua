@@ -4887,6 +4887,7 @@ do
             Items["KeybindList"] = Instances:Create("TextButton", {
                 Parent = Library.Holder.Instance,
                 Name = "\0",
+                FontFace = Library.Font,
                 TextColor3 = FromRGB(235, 235, 235),
                 Text = "Legacy",
                 AutoButtonColor = false,
@@ -4895,6 +4896,7 @@ do
                 BorderColor3 = FromRGB(12, 12, 12),
                 Size = UDim2New(0, 116, 0, 32),
                 BorderSizePixel = 2,
+                TextSize = 14,
                 BackgroundColor3 = FromRGB(14, 17, 15),
                 ZIndex = 10000
             })
