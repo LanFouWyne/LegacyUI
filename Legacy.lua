@@ -3907,7 +3907,12 @@ do
                     TextSize = 9,
                     BackgroundColor3 = FromRGB(14, 17, 15)
                 })
-                Items["KeybindWindow"]:AddToTheme({ BackgroundColor3 = "Background", BorderColor3 = "Border" })
+                Items["KeybindWindow"]:AddToTheme({
+                    BackgroundColor3 = "Background",
+                    TextColor3 = "Text",
+                    BorderColor3 =
+                    "Border"
+                })
 
                 Items["Toggle"] = Instances:Create("TextButton", {
                     Parent = Items["KeybindWindow"].Instance,
